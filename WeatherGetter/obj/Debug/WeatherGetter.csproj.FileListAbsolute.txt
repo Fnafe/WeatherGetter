@@ -1,0 +1,10 @@
+C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\bin\Debug\WeatherGetter.exe.config
+C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\bin\Debug\WeatherGetter.exe
+C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\bin\Debug\WeatherGetter.pdb
+C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.csprojAssemblyReference.cache
+C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.csproj.CoreCompileInputs.cache
+C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.exe
+C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.pdb
+C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.csproj.CopyComplete
