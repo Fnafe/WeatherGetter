@@ -8,3 +8,13 @@ C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.
 C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\bin\Debug\Newtonsoft.Json.dll
 C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\bin\Debug\Newtonsoft.Json.xml
 C:\Users\Admin\source\repos\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.csproj.CopyComplete
+C:\Users\ADMIN\Desktop\Weather Getter Wsei\WeatherGetter\WeatherGetter\bin\Debug\WeatherGetter.exe.config
+C:\Users\ADMIN\Desktop\Weather Getter Wsei\WeatherGetter\WeatherGetter\bin\Debug\WeatherGetter.exe
+C:\Users\ADMIN\Desktop\Weather Getter Wsei\WeatherGetter\WeatherGetter\bin\Debug\WeatherGetter.pdb
+C:\Users\ADMIN\Desktop\Weather Getter Wsei\WeatherGetter\WeatherGetter\bin\Debug\Newtonsoft.Json.dll
+C:\Users\ADMIN\Desktop\Weather Getter Wsei\WeatherGetter\WeatherGetter\bin\Debug\Newtonsoft.Json.xml
+C:\Users\ADMIN\Desktop\Weather Getter Wsei\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.csprojAssemblyReference.cache
+C:\Users\ADMIN\Desktop\Weather Getter Wsei\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.csproj.CoreCompileInputs.cache
+C:\Users\ADMIN\Desktop\Weather Getter Wsei\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.csproj.CopyComplete
+C:\Users\ADMIN\Desktop\Weather Getter Wsei\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.exe
+C:\Users\ADMIN\Desktop\Weather Getter Wsei\WeatherGetter\WeatherGetter\obj\Debug\WeatherGetter.pdb

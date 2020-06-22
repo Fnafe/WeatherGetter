@@ -9,13 +9,49 @@ namespace WeatherGetter
     /// <summary>
     /// Stores information about weather in a city
     /// </summary>
-    class WeatherCity
+    class WeatherCity : IWeatherCity
     {
         public Dictionary<string, float> coord; // Coordinates
         public Dictionary<string, float> main; // Temperature info
         public List<Dictionary<string, string>> weather; // Sky info
         public Dictionary<string, string> sys; // Additional info
         public string name; // City Name
+
+        public string GetCelsiusTemperature()
+        {
+            float originalTemperature;
+
+            originalTemperature = main["temp"];
+
+            return "Obecna temperatura na zewnątrz wynosi: " + (originalTemperature - 272.15f).ToString() + "°C";
+        }
+
+        public string GetMinCelsiusTemperature()
+        {
+            float originalTemperature;
+
+            originalTemperature = main["temp_min"];
+
+            return "Maksymalna temperatura dzisiaj: " + (originalTemperature - 272.15f).ToString() + "°C";
+        }
+
+        public string GetMaxCelsiusTemperature()
+        {
+            float originalTemperature;
+
+            originalTemperature = main["temp_max"];
+
+            return "Minimalna temperatura dzisiaj: " + (originalTemperature - 272.15f).ToString() + "°C";
+        }
+
+        public string GetWeatherInfo()
+        {
+            float originalTemperature;
+
+            //originalTemperature = weather[0][0];
+
+            return "Minimalna temperatura dzisiaj °C";
+        }
     }
 }
 

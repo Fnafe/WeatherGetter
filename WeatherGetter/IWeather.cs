@@ -6,17 +6,19 @@ using System.Threading.Tasks;
 
 namespace WeatherGetter
 {
-    interface IWeather
+    interface IWeatherCity
     {
-        /// <summary>
-        /// Gets weather information from the API
-        /// </summary>
-        /// <returns>json object containing weather info for desired region</returns>
-        Task GetWeatherAsync(string userInput);
+        string GetCelsiusTemperature();
 
-        /// <summary>
-        /// Displays weather information to the user
-        /// </summary>
-        void DisplayWeather();
+        ///// <summary>
+        ///// Gets weather information from the API
+        ///// </summary>
+        ///// <returns>json object containing weather info for desired region</returns>
+        //Task GetWeatherAsync(string userInput);
+
+        ///// <summary>
+        ///// Displays weather information to the user
+        ///// </summary>
+        //void DisplayWeather();
     }
 }

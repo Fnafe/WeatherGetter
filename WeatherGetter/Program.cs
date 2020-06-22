@@ -54,7 +54,7 @@ namespace WeatherGetter
             {
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine("Wystąpił błąd!");
-                Console.ForegroundColor = ConsoleColor.DarkGray;
+                Console.ForegroundColor = ConsoleColor.Gray;
                 return;
             }
             ////jValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(resp);
@@ -70,6 +70,11 @@ namespace WeatherGetter
         public static void DisplayWeather()
         {
             Console.WriteLine(wc.name);
+            Console.WriteLine(wc.weather[0]["main"]);
+            Console.WriteLine(wc.weather[0]["description"]);
+            Console.WriteLine(wc.GetCelsiusTemperature());
+            Console.WriteLine(wc.GetMaxCelsiusTemperature());
+            Console.WriteLine(wc.GetMinCelsiusTemperature());
         }
     }
 }
