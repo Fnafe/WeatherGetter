@@ -46,10 +46,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IWeather.cs" />
+    <Compile Include="IWeatherCity.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tutorial.cs" />
+    <Compile Include="WeatherAPI.cs" />
     <Compile Include="WeatherCity.cs" />
+    <Compile Include="WeatherCityForecast.cs" />
     <Compile Include="WeatherConverter.cs" />
   </ItemGroup>
   <ItemGroup>

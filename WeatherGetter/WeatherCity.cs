@@ -11,6 +11,8 @@ namespace WeatherGetter
     /// </summary>
     class WeatherCity : IWeatherCity
     {
+        #region Current Weather
+
         public Dictionary<string, float> coord; // Coordinates
         public Dictionary<string, float> main; // Temperature info
         public List<Dictionary<string, string>> weather; // Sky info
@@ -23,7 +25,7 @@ namespace WeatherGetter
 
             originalTemperature = main["temp"];
 
-            return "Obecna temperatura na zewnątrz wynosi: " + (originalTemperature - 272.15f).ToString() + "°C";
+            return Math.Round(originalTemperature - 272.15f, 2).ToString();
         }
 
         public string GetMinCelsiusTemperature()
@@ -32,7 +34,7 @@ namespace WeatherGetter
 
             originalTemperature = main["temp_min"];
 
-            return "Maksymalna temperatura dzisiaj: " + (originalTemperature - 272.15f).ToString() + "°C";
+            return Math.Round(originalTemperature - 272.15f, 2).ToString();
         }
 
         public string GetMaxCelsiusTemperature()
@@ -41,17 +43,43 @@ namespace WeatherGetter
 
             originalTemperature = main["temp_max"];
 
-            return "Minimalna temperatura dzisiaj: " + (originalTemperature - 272.15f).ToString() + "°C";
+            return Math.Round(originalTemperature - 272.15f, 2).ToString();
         }
 
-        public string GetWeatherInfo()
+        #endregion /Current Weather
+
+        #region Forecast Weather
+
+        public Dictionary<string, float> temp; // Temperature info used in forecast
+
+        public string GetMorningCelsiusTemperature()
         {
             float originalTemperature;
 
-            //originalTemperature = weather[0][0];
+            originalTemperature = temp["morn"];
 
-            return "Minimalna temperatura dzisiaj °C";
+            return Math.Round(originalTemperature - 272.15f, 2).ToString();
         }
+
+        public string GetDayCelsiusTemperature()
+        {
+            float originalTemperature;
+
+            originalTemperature = temp["day"];
+
+            return Math.Round(originalTemperature - 272.15f, 2).ToString();
+        }
+
+        public string GetNightCelsiusTemperature()
+        {
+            float originalTemperature;
+
+            originalTemperature = temp["night"];
+
+            return Math.Round(originalTemperature - 272.15f, 2).ToString();
+        }
+
+        #endregion /Forecast Weather
     }
 }
 

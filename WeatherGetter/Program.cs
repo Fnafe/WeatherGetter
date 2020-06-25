@@ -1,8 +1,6 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,10 +8,6 @@ namespace WeatherGetter
 {
     class Program
     {
-        private static readonly HttpClient client = new HttpClient();
-
-        static WeatherCity wc;
-
         static List<string> endCommands = new List<string>() {
             "koniec",
             "stop",
@@ -26,55 +20,73 @@ namespace WeatherGetter
         {
             string userInput = "";
 
+            Tutorial.ShowTutorial();
+
             // Main Program Loop
             while (!endCommands.Contains(userInput))
             {
-                userInput = Console.ReadLine();
+                Console.WriteLine("");
 
-                Task t = GetWeatherAsync(userInput);
-                t.Wait();
+                Console.Write("Wprowadź polecenie: ");
+                userInput = Console.ReadLine();
+                ExecuteUserCommand(userInput);
             }
 
             Console.ReadKey();
         }
 
-        // Get weather from openweathermap.org
-        public static async Task GetWeatherAsync(string userInput)
+        private static void ExecuteUserCommand(string userInput)
         {
-            // Make a request to weather API
-            string testUrl = @"http://api.openweathermap.org/data/2.5/weather?q=" + userInput + "&APPID=c656c46298cb34e764fd34a3659ad500";
-            string resp = "";
+            string[] userCommands = userInput.Split(' ');
 
-            // Check if there was a problem with fetching weather info
-            try
+            switch (userCommands[0])
             {
-                resp = await client.GetStringAsync(testUrl);
+                case "teraz":
+                    userInput = userInput.Remove(0, "dzisiaj".Length);
+                    ShowCurrentWeatherForCity(userInput);
+                    break;
+                case "jutro":
+                    userInput = userInput.Remove(0, "jutro".Length);
+                    ShowTommorowWeatherForCity(userInput);
+                    break;
+                case "pomoc":
+                    ShowHelp();
+                    break;
+                default:
+                    DisplayCommandNotFound();
+                    break;
             }
-            catch (HttpRequestException)
-            {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Wystąpił błąd!");
-                Console.ForegroundColor = ConsoleColor.Gray;
-                return;
-            }
-            ////jValues = JsonConvert.DeserializeObject<Dictionary<string, object>>(resp);
-            ////jValues2 = JsonConvert.DeserializeObject<Dictionary<string, object>>(test);
-
-            // Fill information about weather in specified city
-            wc = JsonConvert.DeserializeObject<WeatherCity>(resp);
-
-            DisplayWeather();
         }
 
-        // Display weather to the user
-        public static void DisplayWeather()
+        private static void ShowHelp()
         {
-            Console.WriteLine(wc.name);
-            Console.WriteLine(wc.weather[0]["main"]);
-            Console.WriteLine(wc.weather[0]["description"]);
-            Console.WriteLine(wc.GetCelsiusTemperature());
-            Console.WriteLine(wc.GetMaxCelsiusTemperature());
-            Console.WriteLine(wc.GetMinCelsiusTemperature());
+            Console.WriteLine("---------------------------");
+            Console.WriteLine("Aby wyjsc wpisz: zakoncz");
+            Console.WriteLine("Aby wyswietlic obecna pogode wpisz: teraz nazwa miasta");
+            Console.WriteLine("Aby wyswietlic prognoze na jutro wpisz: jutro nazwa miasta");
+            Console.WriteLine("Aby wyswietlic ten ekran wpisz: pomoc");
+            Console.WriteLine("---------------------------");
+        }
+
+        private static void ShowCurrentWeatherForCity(string city)
+        {
+            Task t = WeatherAPI.GetWeatherAsync(city);
+            t.Wait();
+            WeatherAPI.DisplayCurrentWeather();
+        }
+
+        private static void ShowTommorowWeatherForCity(string city)
+        {
+            Task t = WeatherAPI.GetWeatherAsync(city);
+            t.Wait();
+            t = WeatherAPI.GetWeatherForecastAsync();
+            t.Wait();
+            WeatherAPI.DisplayForecastWeather();
+        }
+
+        private static void DisplayCommandNotFound()
+        {
+            Console.WriteLine("Nie znaleziono takiego polecenia !");
         }
     }
 }
