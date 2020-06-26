@@ -25,10 +25,13 @@ namespace WeatherGetter
             {"few clouds", "Prawie bezchmurnie"},
             {"light rain", "Lekkie opady"},
             {"moderate rain", "Umiarkowane opady"},
-            {"strong rain", "Silne opady"}
+            {"strong rain", "Silne opady"},
+            {"overcast clouds", "Przewaga chmur"}
         };
 
-        // Get weather from openweathermap.org
+        /// <summary>
+        /// Gets weather for a choosen city and asynchronically fills 'wc' object with it
+        /// </summary>
         public static async Task GetWeatherAsync(string userInput)
         {
             // Make a request to weather API
@@ -55,8 +58,15 @@ namespace WeatherGetter
             wc = JsonConvert.DeserializeObject<WeatherCity>(resp);
         }
 
+        /// <summary>
+        /// Gets weather for a choosen lattitute ang longitude
+        /// and asynchronically fills 'wcf' object with it.
+        /// WARNING - it REQUIRES 'wc' object to be set
+        /// otherwise the api call will fail
+        /// </summary>
         public static async Task GetWeatherForecastAsync()
         {
+
             // Make a request to weather API
             string apiCallUrl = @"http://api.openweathermap.org/data/2.5/onecall?lat=" + wc.coord["lat"] + "&lon=" + wc.coord["lon"] + "&exclude=minutely,hourly,current&APPID=c656c46298cb34e764fd34a3659ad500";
             string resp = "";
@@ -80,7 +90,9 @@ namespace WeatherGetter
             wcf = JsonConvert.DeserializeObject<WeatherCityForecast>(resp);
         }
 
-        // Display weather to the user
+        /// <summary>
+        /// Displays the current weather to the user
+        /// </summary>
         public static void DisplayCurrentWeather()
         {
             string skyInfo = wc.weather[0]["description"];
@@ -109,7 +121,9 @@ namespace WeatherGetter
             Console.ForegroundColor = ConsoleColor.Gray;
         }
 
-        // Display forecast weather to the user
+        /// <summary>
+        /// Displays weather forecast for tommorow to the user
+        /// </summary>
         public static void DisplayForecastWeather()
         {
             WeatherCity newWC = wcf.Tommorow;

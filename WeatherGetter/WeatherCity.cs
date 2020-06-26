@@ -13,12 +13,39 @@ namespace WeatherGetter
     {
         #region Current Weather
 
-        public Dictionary<string, float> coord; // Coordinates
-        public Dictionary<string, float> main; // Temperature info
-        public List<Dictionary<string, string>> weather; // Sky info
-        public Dictionary<string, string> sys; // Additional info
-        public string name; // City Name
+        /// <summary>
+        /// Stores lattitude and longitude coordinates of the choosen city 
+        /// (should be set by JsonConvert only unless you know what you're doing)
+        /// </summary>
+        public Dictionary<string, float> coord;
 
+        /// <summary>
+        /// Stores temperature info of the choosen city 
+        /// (should be set by JsonConvert only unless you know what you're doing)
+        /// </summary>
+        public Dictionary<string, float> main;
+
+        /// <summary>
+        /// Stores clouds information of the choosen city 
+        /// (should be set by JsonConvert only unless you know what you're doing)
+        /// </summary>
+        public List<Dictionary<string, string>> weather;
+
+        /// <summary>
+        /// Stores additional info for the choosen city 
+        /// (should be set by JsonConvert only unless you know what you're doing)
+        /// </summary>
+        public Dictionary<string, string> sys;
+
+        /// <summary>
+        /// Stores the name of the choosen city 
+        /// (should be set by JsonConvert only unless you know what you're doing)
+        /// </summary>
+        public string name;
+
+        /// <summary>
+        /// Returns current average temperature measured in a region
+        /// </summary>
         public string GetCelsiusTemperature()
         {
             float originalTemperature;
@@ -28,6 +55,9 @@ namespace WeatherGetter
             return Math.Round(originalTemperature - 272.15f, 2).ToString();
         }
 
+        /// <summary>
+        /// Returns current minimum temperature measured in a region
+        /// </summary>
         public string GetMinCelsiusTemperature()
         {
             float originalTemperature;
@@ -37,6 +67,9 @@ namespace WeatherGetter
             return Math.Round(originalTemperature - 272.15f, 2).ToString();
         }
 
+        /// <summary>
+        /// Returns current maximum temperature measured in a region
+        /// </summary>
         public string GetMaxCelsiusTemperature()
         {
             float originalTemperature;
@@ -50,8 +83,14 @@ namespace WeatherGetter
 
         #region Forecast Weather
 
-        public Dictionary<string, float> temp; // Temperature info used in forecast
+        /// <summary>
+        /// Stores one-day forecast temperature info (should be set by JsonConvert only unless you know what you're doing)
+        /// </summary>
+        public Dictionary<string, float> temp;
 
+        /// <summary>
+        /// Returns temperature in the morning in celsius 
+        /// </summary>
         public string GetMorningCelsiusTemperature()
         {
             float originalTemperature;
@@ -61,6 +100,9 @@ namespace WeatherGetter
             return Math.Round(originalTemperature - 272.15f, 2).ToString();
         }
 
+        /// <summary>
+        /// Returns temperature during the day in celsius 
+        /// </summary>
         public string GetDayCelsiusTemperature()
         {
             float originalTemperature;
@@ -70,6 +112,9 @@ namespace WeatherGetter
             return Math.Round(originalTemperature - 272.15f, 2).ToString();
         }
 
+        /// <summary>
+        /// Returns temperature in the night in celsius 
+        /// </summary>
         public string GetNightCelsiusTemperature()
         {
             float originalTemperature;
@@ -85,7 +130,7 @@ namespace WeatherGetter
 
 
 /*
-SAMPLE RESPONSE:
+SAMPLE WEATHER API RESPONSE:
 {
 "coord":{"lon":21.01,"lat":52.23},
 "weather":[{"id":802,"main":"Clouds","description":"scattered clouds","icon":"03d"}],
