@@ -73,6 +73,8 @@ Prints text letter by letter with 30-milisecond interval.
 
 
 ___
+**Data-storage Classes:**
+
 ## WeatherCity class
 Stores information received from the API about the weather in a choosen city.
 
