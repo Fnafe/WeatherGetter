@@ -16,13 +16,29 @@ namespace WeatherGetter
         {
             Thread.Sleep(200);
 
-            PrintSlowly("Witaj w Pobieraczu pogody !");
-            Thread.Sleep(300);
-            Console.WriteLine("Ten program pozwoli Ci wyświetlić pogodę w dowolnym mieście na całym świecie.");
-            Thread.Sleep(400);
-            Console.WriteLine("Aby pokazać obecną pogodę wpisz: \"teraz nazwa miasta\".");
+            if (Controller.language == Controller.Lang.pl)
+            {
+                PrintSlowly("Witaj w Pobieraczu pogody !");
+                Thread.Sleep(200);
+                Console.WriteLine("Ten program pozwoli Ci wyświetlić pogodę w dowolnym mieście na całym świecie.");
+                Thread.Sleep(300);
+                Console.WriteLine("- Aby pokazać obecną pogodę wpisz: \"teraz nazwa miasta\".");
+                Thread.Sleep(400);
+                Console.WriteLine("- Aby wyświetlić pomoc wpisz: \"pomoc\".");
+            }
+            else if (Controller.language == Controller.Lang.en)
+            {
+                PrintSlowly("Welcome to weather getter !");
+                Thread.Sleep(200);
+                Console.WriteLine("This program lets you to check the weather in any city in the world.");
+                Thread.Sleep(300);
+                Console.WriteLine("- To show current weather type: \"now city name\".");
+                Thread.Sleep(400);
+                Console.WriteLine("- To display help type: \"help\".");
+            }
+
             Thread.Sleep(500);
-            Console.WriteLine("Aby wyświetlić pomoc wpisz: \"pomoc\".");
+            Console.WriteLine("- To change language type: \"lang language_letter_code (PL/EN)\".");
         }
 
         /// <summary>

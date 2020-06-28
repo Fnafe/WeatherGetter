@@ -12,16 +12,35 @@ namespace WeatherGetter
     /// </summary>
     static class Controller
     {
+        public enum Lang
+        {
+            en = 0,
+            pl
+        }
+
         /// <summary>
-        /// Stores polish "end" commands
+        /// Stores "end-program" commands
         /// </summary>
         public static List<string> endCommands = new List<string>() {
-            "koniec",
-            "stop",
             "zakończ",
-            "zamknij",
-            "zakoncz"
+            "zakoncz",
+            "stop",
+            "end",
+            "finish",
+            "exit"
         };
+
+        public static Lang language = Lang.pl;
+
+        ///// <summary>
+        ///// Stores weather commands
+        ///// </summary>
+        //public static List<string> weatherCommands = new List<string>() {
+        //    "teraz",
+        //    "obecnie",
+        //    "now",
+        //    "current"
+        //};
 
         /// <summary>
         /// Gets full command, parses and execute it
@@ -30,18 +49,72 @@ namespace WeatherGetter
         {
             string[] userCommands = userInput.Split(' ');
 
-            switch (userCommands[0])
+            //string translatedCommand = weatherCommands.Contains(userCommands[0]) ? weatherCommands[weatherCommands.IndexOf(userCommands[0])] : "";
+
+            if (language == Lang.pl)
             {
-                case "teraz":
-                    userInput = userInput.Remove(0, "dzisiaj".Length);
-                    ShowCurrentWeatherForCity(userInput);
+                switch (userCommands[0])
+                {
+                    case "teraz":
+                        userInput = userInput.Remove(0, "teraz ".Length);
+                        ShowCurrentWeatherForCity(userInput);
+                        break;
+                    case "jutro":
+                        userInput = userInput.Remove(0, "jutro ".Length);
+                        ShowTommorowWeatherForCity(userInput);
+                        break;
+                    case "pomoc":
+                        ShowHelp();
+                        break;
+                    case "lang":
+                        userInput = userInput.Remove(0, "lang ".Length);
+                        ChangeLanguage(userInput);
+                        break;
+                    default:
+                        DisplayCommandNotFound();
+                        break;
+                }
+            }
+            else if (language == Lang.en)
+            {
+                switch (userCommands[0])
+                {
+                    case "now":
+                        userInput = userInput.Remove(0, "now ".Length);
+                        ShowCurrentWeatherForCity(userInput);
+                        break;
+                    case "tommorow":
+                        userInput = userInput.Remove(0, "tommorow ".Length);
+                        ShowTommorowWeatherForCity(userInput);
+                        break;
+                    case "help":
+                        ShowHelp();
+                        break;
+                    case "lang":
+                        userInput = userInput.Remove(0, "lang ".Length);
+                        ChangeLanguage(userInput);
+                        break;
+                    default:
+                        DisplayCommandNotFound();
+                        break;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Changes language field to the choosen language
+        /// </summary>
+        private static void ChangeLanguage(string lang)
+        {
+            switch (lang)
+            {
+                case "pl":
+                    language = Lang.pl;
+                    Console.WriteLine("Język zmieniony na polski");
                     break;
-                case "jutro":
-                    userInput = userInput.Remove(0, "jutro".Length);
-                    ShowTommorowWeatherForCity(userInput);
-                    break;
-                case "pomoc":
-                    ShowHelp();
+                case "en":
+                    language = Lang.en;
+                    Console.WriteLine("Language switched to English");
                     break;
                 default:
                     DisplayCommandNotFound();
@@ -54,12 +127,24 @@ namespace WeatherGetter
         /// </summary>
         private static void ShowHelp()
         {
-            Console.WriteLine("---------------------------");
-            Console.WriteLine("Aby wyjsc wpisz: zakoncz");
-            Console.WriteLine("Aby wyswietlic obecna pogode wpisz: teraz nazwa miasta");
-            Console.WriteLine("Aby wyswietlic prognoze na jutro wpisz: jutro nazwa miasta");
-            Console.WriteLine("Aby wyswietlic ten ekran wpisz: pomoc");
-            Console.WriteLine("---------------------------");
+            if (language == Lang.pl)
+            {
+                Console.WriteLine("---------------------------");
+                Console.WriteLine("Aby wyjsc wpisz: zakoncz");
+                Console.WriteLine("Aby wyswietlic obecna pogode wpisz: teraz nazwa miasta");
+                Console.WriteLine("Aby wyswietlic prognoze na jutro wpisz: jutro nazwa miasta");
+                Console.WriteLine("Aby wyswietlic ten tekst wpisz: pomoc");
+                Console.WriteLine("---------------------------");
+            }
+            else if (language == Lang.en)
+            {
+                Console.WriteLine("---------------------------");
+                Console.WriteLine("To exit type: exit");
+                Console.WriteLine("To show current weather type: now city name");
+                Console.WriteLine("To show tommorow forecast type: tommorow city name");
+                Console.WriteLine("To show this text type: help");
+                Console.WriteLine("---------------------------");
+            }
         }
 
         /// <summary>
@@ -69,7 +154,11 @@ namespace WeatherGetter
         {
             Task t = WeatherAPI.GetWeatherAsync(city);
             t.Wait();
-            WeatherAPI.DisplayCurrentWeather();
+
+            if (WeatherAPI.requestSuccesfull)
+            {
+                WeatherAPI.DisplayCurrentWeather();
+            }
         }
 
         /// <summary>
@@ -79,9 +168,17 @@ namespace WeatherGetter
         {
             Task t = WeatherAPI.GetWeatherAsync(city);
             t.Wait();
-            t = WeatherAPI.GetWeatherForecastAsync();
-            t.Wait();
-            WeatherAPI.DisplayForecastWeather();
+
+            if (WeatherAPI.requestSuccesfull)
+            {
+                t = WeatherAPI.GetWeatherForecastAsync();
+                t.Wait();
+            }
+
+            if (WeatherAPI.requestSuccesfull)
+            {
+                WeatherAPI.DisplayForecastWeather();
+            }
         }
 
         /// <summary>
@@ -89,7 +186,14 @@ namespace WeatherGetter
         /// </summary>
         private static void DisplayCommandNotFound()
         {
-            Console.WriteLine("Nie znaleziono takiego polecenia !");
+            if (language == Lang.pl)
+            {
+                Console.WriteLine("Nie znaleziono takiej opcji !");
+            }
+            else if (language == Lang.en)
+            {
+                Console.WriteLine("Option not found !");
+            }
         }
     }
 }

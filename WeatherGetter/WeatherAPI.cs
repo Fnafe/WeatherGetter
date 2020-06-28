@@ -14,6 +14,7 @@ namespace WeatherGetter
 
         static WeatherCity wc; // Current weather
         static WeatherCityForecast wcf; // Weather forecast
+        public static bool requestSuccesfull = false;
 
         // English to polish weather dictionary
         static Dictionary<string, string> weatherDictionary = new Dictionary<string, string>()
@@ -45,10 +46,8 @@ namespace WeatherGetter
             }
             catch (HttpRequestException)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                //Console.WriteLine("Wystąpił błąd!");
-                Console.WriteLine("Nie znaleziono miasta lub brak połączenia!");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                DisplayErrorMessage();
+                requestSuccesfull = false;
                 return;
             }
 
@@ -56,6 +55,7 @@ namespace WeatherGetter
 
             // Fill information about weather in specified city
             wc = JsonConvert.DeserializeObject<WeatherCity>(resp);
+            requestSuccesfull = true;
         }
 
         /// <summary>
@@ -78,9 +78,8 @@ namespace WeatherGetter
             }
             catch (HttpRequestException)
             {
-                Console.ForegroundColor = ConsoleColor.Red;
-                Console.WriteLine("Nie znaleziono miasta lub brak połączenia!");
-                Console.ForegroundColor = ConsoleColor.Gray;
+                DisplayErrorMessage();
+                requestSuccesfull = false;
                 return;
             }
 
@@ -88,6 +87,7 @@ namespace WeatherGetter
 
             // Fill information about weather in specified city
             wcf = JsonConvert.DeserializeObject<WeatherCityForecast>(resp);
+            requestSuccesfull = true;
         }
 
         /// <summary>
@@ -98,24 +98,52 @@ namespace WeatherGetter
             string skyInfo = wc.weather[0]["description"];
             if (weatherDictionary.ContainsKey(wc.weather[0]["description"]))
             {
-                skyInfo = weatherDictionary[wc.weather[0]["description"]];
+                if (Controller.language == Controller.Lang.pl)
+                {
+                    skyInfo = weatherDictionary[wc.weather[0]["description"]];
+                }
+                else if (Controller.language == Controller.Lang.en)
+                {
+                    skyInfo = wc.weather[0]["description"];
+                }
             }
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(skyInfo);
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            Console.Write("Obecna temperatura na zewnątrz wynosi: ");
+            if (Controller.language == Controller.Lang.pl)
+            {
+                Console.Write("Obecna temperatura na zewnątrz wynosi: ");
+            }
+            else if (Controller.language == Controller.Lang.en)
+            {
+                Console.Write("Current temperature outside: ");
+            }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(wc.GetCelsiusTemperature() + "°C");
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            Console.Write("Minimalna temperatura w regionie: ");
+            if (Controller.language == Controller.Lang.pl)
+            {
+                Console.Write("Minimalna temperatura w regionie: ");
+            }
+            else if (Controller.language == Controller.Lang.en)
+            {
+                Console.Write("Minimal temperature outside: ");
+            }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(wc.GetMinCelsiusTemperature() + "°C");
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            Console.Write("Maksymalna temperatura w regionie: ");
+            if (Controller.language == Controller.Lang.pl)
+            {
+                Console.Write("Maksymalna temperatura w regionie: ");
+            }
+            else if (Controller.language == Controller.Lang.en)
+            {
+                Console.Write("Maximal temperature outside: ");
+            }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(wc.GetMaxCelsiusTemperature() + "°C");
             Console.ForegroundColor = ConsoleColor.Gray;
@@ -131,26 +159,73 @@ namespace WeatherGetter
             string skyInfo = newWC.weather[0]["description"];
             if (weatherDictionary.ContainsKey(newWC.weather[0]["description"]))
             {
-                skyInfo = weatherDictionary[newWC.weather[0]["description"]];
+                if (Controller.language == Controller.Lang.pl)
+                {
+                    skyInfo = weatherDictionary[newWC.weather[0]["description"]];
+                }
+                else if (Controller.language == Controller.Lang.en)
+                {
+                    skyInfo = newWC.weather[0]["description"];
+                }
             }
 
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine(skyInfo);
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            Console.Write("Temperatura rano: ");
+            if (Controller.language == Controller.Lang.pl)
+            {
+                Console.Write("Temperatura rano: ");
+            }
+            else if (Controller.language == Controller.Lang.en)
+            {
+                Console.Write("Morning temperature: ");
+            }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(newWC.GetMorningCelsiusTemperature() + "°C");
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            Console.Write("Temperatura w dzień: ");
+            if (Controller.language == Controller.Lang.pl)
+            {
+                Console.Write("Temperatura w dzień: ");
+            }
+            else if (Controller.language == Controller.Lang.en)
+            {
+                Console.Write("Day temperature: ");
+            }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(newWC.GetDayCelsiusTemperature() + "°C");
             Console.ForegroundColor = ConsoleColor.Gray;
 
-            Console.Write("Temperatura wieczorem: ");
+            if (Controller.language == Controller.Lang.pl)
+            {
+                Console.Write("Temperatura wieczorem: ");
+            }
+            else if (Controller.language == Controller.Lang.en)
+            {
+                Console.Write("Evening temperature: ");
+            }
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine(newWC.GetNightCelsiusTemperature() + "°C");
+            Console.ForegroundColor = ConsoleColor.Gray;
+        }
+
+        /// <summary>
+        /// Writes error message to the console
+        /// </summary>
+        public static void DisplayErrorMessage()
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+
+            if (Controller.language == Controller.Lang.pl)
+            {
+                Console.WriteLine("Nie znaleziono miasta lub brak połączenia!");
+            }
+            else if (Controller.language == Controller.Lang.en)
+            {
+                Console.WriteLine("City not found or connection error!");
+            }
+
             Console.ForegroundColor = ConsoleColor.Gray;
         }
     }

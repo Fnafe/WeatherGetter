@@ -19,8 +19,16 @@ namespace WeatherGetter
             {
                 Console.WriteLine("");
 
-                Console.Write("Wprowadź polecenie: ");
+                if (Controller.language == Controller.Lang.pl)
+                {
+                    Console.Write("Wprowadź polecenie: ");
+                }
+                else if (Controller.language == Controller.Lang.en)
+                {
+                    Console.Write("Input a command: ");
+                }
                 userInput = Console.ReadLine();
+                userInput.ToLower();
                 Controller.ExecuteUserCommand(userInput);
             }
 
