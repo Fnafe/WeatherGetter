@@ -62,7 +62,7 @@ Writes "Command not found" text in the console.
 Changes language field to the choosen language and by this - changes program output language.
 
 
-__
+___
 **Tutorial:**
 
 ## Tutorial.ShowTutorial()
