@@ -1,7 +1,7 @@
 # WeatherGetter
 (Project for WSEI) Weather Getter allows you to get real-time info about the current weather in a choosen city and also get a real-time forecast for the next day.
 
-**Available functions description:**
+**WeatherAPI functions:**
 
 ## WeatherAPI.GetWeatherAsync(string \<city name\>)
 It takes city name as a param and sets *WeatherAPI.wc* to store current weather in a choosen city.
@@ -31,3 +31,49 @@ It **requires** *WeatherAPI.wc* to be set so *WeatherAPI.GetWeatherAsync()* alwa
 Prints current weather forecast for tommorow to the console.
 
 It **requires** *WeatherAPI.wcf* to be set so *WeatherAPI.GetWeatherForecastAsync()* always needs to be invoked before you invoke this function.
+
+## DisplayErrorMessage()
+Writes to the console that there was no city of such name found or there is no connection with the internet.
+
+___
+**Controller functions:**
+
+## Controller.ExecuteUserCommand(string \<command\>)
+Takes a full line of a command given by the user and invokes corresponding function.
+
+Example:
+jutro Kraków -> Invokes *ShowTommorowWeatherForCity()* with a *Kraków* parameter.
+
+## Controller.ShowHelp()
+Writes availeble commands to the console.
+Invokes WeatherAPI.GetWeatherAsync()
+
+## ShowCurrentWeatherForCity(string \<city name\>)
+Invokes *WeatherAPI.GetWeatherAsync(city name)*, waits for it to finish and if there was no error invokes *WeatherAPI.DisplayCurrentWeather()*.
+
+## ShowCurrentWeatherForCity(string \<city name\>)
+Invokes *WeatherAPI.GetWeatherAsync(city name)*, waits for it to finish, if there was no error then invokes *WeatherAPI.GetWeatherForecastAsync()* and if again there was no error invokes *WeatherAPI.DisplayCurrentWeather()*.
+
+## DisplayCommandNotFound()
+Writes "Command not found" text in the console.
+
+
+___
+**Tutorial functions:**
+
+## Tutorial.ShowTutorial()
+Prints initial tutorial and information about the app to the user.
+
+## PrintSlowly(string \<text\>)
+Prints text letter by letter with 30-milisecond interval.
+
+
+___
+## WeatherCity class
+Stores information received from the API about the weather in a choosen city.
+
+## WeatherCityForecast class
+Stores forecast received from the API for a choosen city
+- Tommorow -> Returns *WeatherCity* object filled with weather forecast for the next day (tommorow).
+
+
