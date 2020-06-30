@@ -32,7 +32,7 @@ Prints current weather forecast for tommorow to the console.
 
 It **requires** *WeatherAPI.wcf* to be set so *WeatherAPI.GetWeatherForecastAsync()* always needs to be invoked before you invoke this function.
 
-## DisplayErrorMessage()
+## WeatherAPI.DisplayErrorMessage()
 Writes to the console that there was no city of such name found or there is no connection to the internet.
 
 
@@ -49,16 +49,16 @@ jutro Kraków -> Invokes *ShowTommorowWeatherForCity()* with a *Kraków* paramet
 Writes availeble commands to the console.
 Invokes WeatherAPI.GetWeatherAsync()
 
-## ShowCurrentWeatherForCity(string \<city name\>)
+## Controller.ShowCurrentWeatherForCity(string \<city name\>)
 Invokes *WeatherAPI.GetWeatherAsync(city name)*, waits for it to finish and if there was no error invokes *WeatherAPI.DisplayCurrentWeather()*.
 
-## ShowCurrentWeatherForCity(string \<city name\>)
+## Controller.ShowCurrentWeatherForCity(string \<city name\>)
 Invokes *WeatherAPI.GetWeatherAsync(city name)*, waits for it to finish, if there was no error then invokes *WeatherAPI.GetWeatherForecastAsync()* and if again there was no error invokes *WeatherAPI.DisplayCurrentWeather()*.
 
-## DisplayCommandNotFound()
+## Controller.DisplayCommandNotFound()
 Writes "Command not found" text in the console.
 
-## ChangeLanguage(string \<language name\>)
+## Controller.ChangeLanguage(string \<language name\>)
 Changes language field to the choosen language and by this - changes program output language.
 
 
@@ -68,7 +68,7 @@ ___
 ## Tutorial.ShowTutorial()
 Prints initial tutorial and information about the app to the user.
 
-## PrintSlowly(string \<text\>)
+## Tutorial.PrintSlowly(string \<text\>)
 Prints text letter by letter with 30-milisecond interval.
 
 
