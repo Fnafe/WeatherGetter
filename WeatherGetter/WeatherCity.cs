@@ -17,25 +17,25 @@ namespace WeatherGetter
         /// Stores lattitude and longitude coordinates of the choosen city 
         /// (should be set by JsonConvert only unless you know what you're doing)
         /// </summary>
-        public Dictionary<string, float> coord;
+        public IDictionary<string, float> coord;
 
         /// <summary>
         /// Stores temperature info of the choosen city 
         /// (should be set by JsonConvert only unless you know what you're doing)
         /// </summary>
-        public Dictionary<string, float> main;
+        public IDictionary<string, float> main;
 
         /// <summary>
         /// Stores clouds information of the choosen city 
         /// (should be set by JsonConvert only unless you know what you're doing)
         /// </summary>
-        public List<Dictionary<string, string>> weather;
+        public IList<IDictionary<string, string>> weather;
 
         /// <summary>
         /// Stores additional info for the choosen city 
         /// (should be set by JsonConvert only unless you know what you're doing)
         /// </summary>
-        public Dictionary<string, string> sys;
+        public IDictionary<string, string> sys;
 
         /// <summary>
         /// Stores the name of the choosen city 

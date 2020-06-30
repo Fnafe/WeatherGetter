@@ -111,10 +111,12 @@ namespace WeatherGetter
                 case "pl":
                     language = Lang.pl;
                     Console.WriteLine("Język zmieniony na polski");
+                    Console.WriteLine("- Aby wyświetlić pomoc wpisz: \"pomoc\".");
                     break;
                 case "en":
                     language = Lang.en;
                     Console.WriteLine("Language switched to English");
+                    Console.WriteLine("- To display help type: \"help\".");
                     break;
                 default:
                     DisplayCommandNotFound();
@@ -130,19 +132,22 @@ namespace WeatherGetter
             if (language == Lang.pl)
             {
                 Console.WriteLine("---------------------------");
-                Console.WriteLine("Aby wyjsc wpisz: zakoncz");
-                Console.WriteLine("Aby wyswietlic obecna pogode wpisz: teraz nazwa miasta");
-                Console.WriteLine("Aby wyswietlic prognoze na jutro wpisz: jutro nazwa miasta");
-                Console.WriteLine("Aby wyswietlic ten tekst wpisz: pomoc");
+                Console.WriteLine("  Aby wyjsc wpisz: zakoncz");
+                Console.WriteLine("  Aby wyswietlic obecna pogode wpisz: teraz nazwa miasta");
+                Console.WriteLine("  Aby wyswietlic prognoze na jutro wpisz: jutro nazwa miasta");
+                Console.WriteLine("  Jeżeli miasto nie zostało odnalezione spróbuj użyć jego angielskiej nazwy");
+                Console.WriteLine("  Aby wyswietlic ten tekst wpisz: pomoc");
+                Console.WriteLine("  Aby zmienić język wpisz: lang kod_literowy_języka");
                 Console.WriteLine("---------------------------");
             }
             else if (language == Lang.en)
             {
                 Console.WriteLine("---------------------------");
-                Console.WriteLine("To exit type: exit");
-                Console.WriteLine("To show current weather type: now city name");
-                Console.WriteLine("To show tommorow forecast type: tommorow city name");
-                Console.WriteLine("To show this text type: help");
+                Console.WriteLine("  To exit type: exit");
+                Console.WriteLine("  To show current weather type: now city name");
+                Console.WriteLine("  To show tommorow forecast type: tommorow city name");
+                Console.WriteLine("  To show this text type: help");
+                Console.WriteLine("  To change language type: lang language_letter_code");
                 Console.WriteLine("---------------------------");
             }
         }
