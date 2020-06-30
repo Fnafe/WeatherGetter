@@ -1,7 +1,7 @@
 # WeatherGetter
 (Project for WSEI) Weather Getter allows you to get real-time info about the current weather in a choosen city and also get a real-time forecast for the next day.
 
-**WeatherAPI functions:**
+**WeatherAPI:**
 
 ## WeatherAPI.GetWeatherAsync(string \<city name\>)
 It takes city name as a param and sets *WeatherAPI.wc* to store current weather in a choosen city.
@@ -33,10 +33,11 @@ Prints current weather forecast for tommorow to the console.
 It **requires** *WeatherAPI.wcf* to be set so *WeatherAPI.GetWeatherForecastAsync()* always needs to be invoked before you invoke this function.
 
 ## DisplayErrorMessage()
-Writes to the console that there was no city of such name found or there is no connection with the internet.
+Writes to the console that there was no city of such name found or there is no connection to the internet.
+
 
 ___
-**Controller functions:**
+**Controller:**
 
 ## Controller.ExecuteUserCommand(string \<command\>)
 Takes a full line of a command given by the user and invokes corresponding function.
@@ -57,9 +58,12 @@ Invokes *WeatherAPI.GetWeatherAsync(city name)*, waits for it to finish, if ther
 ## DisplayCommandNotFound()
 Writes "Command not found" text in the console.
 
+## ChangeLanguage(string \<language name\>)
+Changes language field to the choosen language and by this - changes program output language.
+
 
 ___
-**Tutorial functions:**
+**Tutorial:**
 
 ## Tutorial.ShowTutorial()
 Prints initial tutorial and information about the app to the user.
@@ -69,6 +73,8 @@ Prints text letter by letter with 30-milisecond interval.
 
 
 ___
+**Data-storage Classes:**
+
 ## WeatherCity class
 Stores information received from the API about the weather in a choosen city.
 
